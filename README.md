@@ -9,6 +9,6 @@ When the server side clicks on the link for more details, they are led to a page
 
 ![alt text](https://raw.githubusercontent.com/parthnan/SOS-WebApp/master/SOSmap.png)
 
-This simple SOS system has the architecture os a simple client server model as below.
+This simple SOS system has the architecture os a simple client server model via a DB as below.
 
 ![alt text](https://raw.githubusercontent.com/parthnan/SOS-WebApp/master/SOSsystem.png)
