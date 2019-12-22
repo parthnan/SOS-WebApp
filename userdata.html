@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script> -->
+        <!-- <script>
+            function getParam(name, url) {
+                if (!url) url = window.location.href;
+                //url = decodeURI(url);
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+        </script> -->
+    </head>
+    <script>
+            // firebase.initializeApp({
+            //     apiKey: 'AIzaSyB355FvOaCYwxukfOOGdC7W-T1lQg7LCws',
+            //     authDomain: 'kokonioru-f4765.firebaseapp.com',
+            //     projectId: 'kokonioru-f4765'
+            // });
+            var db = firebase.firestore();
+            console.log(getParam('ido'));
+            console.log(getParam('keido'));
+            console.log(getParam('state'));
+            console.log(getParam('text'));
+
+            // db.collection("users").get().then((querySnapshot) => {
+            //     querySnapshot.forEach((doc) => {
+
+            //         console.log(`${doc.id} => ${doc.data().first}`);
+            //     });
+            // });
+    </script>
+    <body>
+
+    </body>
+</html>

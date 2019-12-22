@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>Help signal</title>
+    <!-- javaScript-->
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+        <script>
+            firebase.initializeApp({
+                apiKey: 'AIzaSyB355FvOaCYwxukfOOGdC7W-T1lQg7LCws',
+                authDomain: 'kokonioru-f4765.firebaseapp.com',
+                projectId: 'kokonioru-f4765'
+            });
+
+            var db = firebase.firestore();
+
+            var inIdo = 0;
+            var inKeido = 0 ;
+            
+            //位置情報取得 
+            navigator.geolocation.getCurrentPosition(
+            // 取得成功した場合
+              function(position) {
+                //alert("緯度:"+position.coords.latitude+",経度"+position.coords.longitude);
+                inIdo = position.coords.latitude;
+                inKeido = position.coords.longitude;
+              },
+            // 取得失敗した場合
+            function(error) {
+              switch(error.code) {
+                case 1: //PERMISSION_DENIED
+                  alert("位置情報の利用が許可されていません");
+                  break;
+                case 2: //POSITION_UNAVAILABLE
+                  alert("現在位置が取得できませんでした");
+                  break;
+                case 3: //TIMEOUT
+                  alert("タイムアウトになりました");
+                  break;
+                default:
+                  alert("その他のエラー(エラーコード:"+error.code+")");
+                  break;
+              }
+            });
+
+        </script>
+
+        <script>
+            $(function() {
+                    // ボタンクリックで時刻を更新
+                    $('#btn').click(function(e) {
+                    //$(this).text((new Date()).toLocaleString());                 
+                    //dbへデータ挿入
+                    console.log("send");
+                    var inState = $('#sendData [name=state]').val();
+                    var inText = $('#sendData [name=text]').val();
+                    db.collection("kokonioru").add({
+                        state: inState,
+                        text: inText,
+                        ido: inIdo,
+                        keido: inKeido
+                    })
+                    .then(function(docRef) {
+                        console.log("Document written with ID: ", docRef.id);
+                    })
+                    .catch(function(error) {
+                        console.error("Error adding document: ", error);
+                    });
+
+                    //$(this).text("Help発令");
+                    alert('Helpを送信しました!');
+                    //location.reload();
+                });
+            });
+        </script>
+  </head>
+
+  <body bgcolor="#CCCCFF">
+  <form id="sendData">
+  <center>
+  <div>
+    <label class = "label">状態</label>
+  </div>
+  <p1>
+    <select name = "state">
+      <option value = "0">閉じ込められ，動けない</option>
+      <option value = "1">水，食料が必要</option>
+      <option value = "2">けが人がいる</option>
+      <option value = "3">その他</option>
+    </select>
+  </p1>
+  <div>
+    <label class="label">特記事項<br></label>
+  </div>
+  <textarea class="inputs" name="text" ></textarea>
+  <div class="send">
+    <input type="button" id="btn" value="Help送信">
+  </div>
+  <center>
+  </form>
+  </body>
+</html>
+<style>
+div{
+	margin-top: 100px;
+	font-size: 96px;
+}
+.send{
+	font-size: 30px;
+}
+select{
+	font-size: 48px;
+	width: 70%;
+	height: 100px
+}
+textarea{
+font-size: 36px;
+	width: 70%;
+	height: 200px;
+}
+input#btn{
+	width: 50%;
+	height: 100px;
+	font-size: 36px;
+}
+</style>

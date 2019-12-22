@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8"/>
+      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+      <script>
+          firebase.initializeApp({
+              apiKey: 'AIzaSyB355FvOaCYwxukfOOGdC7W-T1lQg7LCws',
+              authDomain: 'kokonioru-f4765.firebaseapp.com',
+              projectId: 'kokonioru-f4765'
+          });
+
+        var db = firebase.firestore();  
+        var stateData = ['閉じ込められ，動けない','水，食料が必要','けが人がいる','その他'];
+      </script>
+
+      <script>
+          $(function() {
+              function reloadData (){
+                  $("ul").empty();
+                      db.collection("kokonioru").get().then((querySnapshot) => {
+                          querySnapshot.forEach((doc) => {
+                          //console.log(`${doc.id} => ${doc.data().}`);
+                              var ido = doc.data().ido;
+                              var keido = doc.data().keido;
+                              var state = doc.data().state;
+                              var text = doc.data().text;
+                              var url = './eachUser.html?ido=' + `${ido}` + '&keido=' + `${keido}` + '&state=' + `${state}` + '&text=' + `${text}`;
+                              $('#list').append('<li><a href=' + url +'>' + stateData[state] + '</a></li>');
+                      });
+                  });
+              }
+              reloadData();
+              db.collection("kokonioru").onSnapshot(function(c) {
+                  reloadData();
+              });
+          });
+      </script>
+    </head>
+    <body>  
+    <center>
+      <h1>⚠️Help一覧⚠️</h1>
+      <ul id='list'>
+        <li>生き埋めになっています。</li>
+        <li>閉じ込められています。</li>
+        <li>お水が欲しいです。</li>
+        <li>食料が足りません。</li>
+      </ul>
+    </body>
+    <footer>
+    <img src="./Fujitsu-Logo.png" />
+    </footer>
+  </center>
+</html>
+<style>
+
+html{
+  background-image: linear-gradient(
+    -45deg,
+    #C6E6FB 6.25%, #fff 6.25%,
+    #fff 12.5%, #fbc6cc 12.5%,
+    #fbc6cc 18.75%, #fff 18.75%,
+    #fff 25%, #C6E6FB 25%,
+    #C6E6FB 31.25%, #fff 31.25%,
+    #fff 37.5%, #fbc6cc 37.5%,
+    #fbc6cc 43.75%, #fff 43.75%,
+    #fff 50%, #C6E6FB 50%,
+    #C6E6FB 56.25%, #fff 56.25%,
+    #fff 62.5%, #fbc6cc 62.5%,
+    #fbc6cc 68.75%, #fff 68.75%,
+    #fff 75%, #C6E6FB 75%,
+    #C6E6FB 81.25%, #fff 81.25%,
+    #fff 87.5%, #fbc6cc 87.5%,
+    #fbc6cc 93.75%, #fff 93.75%,
+    #fff
+  );
+  background-size: 444px 444px;
+  }
+
+    h1{
+      font-size:125px;
+      letter-spacing:7px;
+      margin-bottom: 120px;
+      background-color: white;
+    }
+    ul, ol {
+      padding: 0;
+      position: relative;
+  }
+
+    ul li, ol li {
+      color: black;
+      font-weight: 600;
+      border-left: solid 10px #ff3838;/*左側の線*/
+      background: #FFEE00;
+      margin-bottom: 33px;/*下のバーとの余白*/
+      line-height: 2.5;
+      padding: 0.5em;
+      list-style-type: none!important;/*ポチ消す*/
+      font-size: 65px;
+      width:85%;
+    }
+
+    img{
+      width: 200px;
+      height:100px;
+      margin-top: 170px;
+    }
+
+</style>

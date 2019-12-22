@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+      var stateData = ['閉じ込められ，動けない','水，食料が必要','けが人がいる','その他'];
+      function getParam(name, url) {
+          if (!url) url = window.location.href;
+          //url = decodeURI(url);
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+    </script> 
+  </head>
+<body>
+<center>
+<h1>⚠️Helpがきました⚠️</h1>
+<br>
+<p1>状態:　</p1>
+<div class="box1">
+<p2 id="state"><script> document.write(stateData[ Number(getParam('state'))] ) </script></p2>
+</div>
+<br>
+<div class="box2">
+<p2 id="text"><script> document.write(getParam('text')) </script></p2>
+</div><br>
+<p3>位置</p3>
+<br>
+<p4 id="pos">
+  <script> 
+    document.write(`<a href=\'https://www.google.co.jp/maps?q=${getParam('ido')},${getParam('keido')}\'>Map</a>`);
+  </script>
+  </p4>
+<br>
+<img src="./Fujitsu-Logo.png" />
+<center>
+  <script>
+
+  </script>
+</body>
+
+<style>
+
+  body {
+    width: 98%;
+    border:20px solid red;
+    box-sizing:border-box;
+}
+
+  img{
+    width: 200px;
+    height:100px;
+    margin-top: 450px;
+    margin-bottom: 90px;
+
+  }
+  h1 {
+  position: relative;
+  padding: 0.6em;
+  background: -webkit-repeating-linear-gradient(-45deg, #fff5df, #fff5df 4px,#ffe4b1 3px, #ffe4b1 8px);
+  background: repeating-linear-gradient(-45deg, #fff5df, #fff5df 4px,#ffe4b1 3px, #ffe4b1 8px);
+  border-radius: 7px;
+  text-align: center;
+  font-size: 73px;
+  display: inline-block;
+  letter-spacing:7px;
+  margin-bottom:160px;
+  margin-top: 35px;
+  color:red;
+}
+
+h1:after {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 30px;
+  border: 15px solid transparent;
+  border-top: 15px solid #ffebbe;
+  width: 0;
+  height: 0;
+}
+
+p1 {
+  font-size: 55px;
+
+}
+
+.box1 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    background: #FFF;
+    border: solid 3px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    display: inline-block;
+    margin-bottom: 80px;
+}
+.box1 p2 {
+    margin: 0;
+    padding: 0;
+    font-size:55px;
+}
+
+.box2 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    border: solid 3px #000000;
+    display: inline-block;
+    margin-bottom: 120px;
+}
+.box2 p2 {
+    margin: 0;
+    padding: 0;
+    font-size:55px;
+}
+
+p3{
+  font-size:55px;
+  margin-right:70%;
+}
+p4{
+  font-size:43px;
+}
+
+
+</style>

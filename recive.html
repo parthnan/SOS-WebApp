@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+        <script>
+            firebase.initializeApp({
+                apiKey: 'AIzaSyB355FvOaCYwxukfOOGdC7W-T1lQg7LCws',
+                authDomain: 'kokonioru-f4765.firebaseapp.com',
+                projectId: 'kokonioru-f4765'
+            });
+
+            var db = firebase.firestore();
+            
+        </script>
+
+        <script>
+            $(function() {
+                function reloadData (){
+                    $("div").empty();
+                        db.collection("kokonioru").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                            //console.log(`${doc.id} => ${doc.data().}`);
+                                var ido = doc.data().ido;
+                                var keido = doc.data().keido;
+                                var state = doc.data().state;
+                                var text = doc.data().text;
+                                var url = './eachUser.html?ido=' + `${ido}` + '&keido=' + `${keido}` + '&state=' + `${state}` + '&text=' + `${text}`;
+                                $('#list').append('<a href=' + url +'>' + 'a</a><br>');
+                        });
+                    });
+                }
+                reloadData();
+                db.collection("kokonioru").onSnapshot(function(c) {
+                    reloadData();
+                });
+                    // ボタンクリックで時刻を更新
+                $('#btn').click(function(e) {
+                    reloadData();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="btn">更新</button>
+        <div id='list'>
+
+        </div>
+    </body>
+</html>
