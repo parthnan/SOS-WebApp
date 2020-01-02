@@ -3,7 +3,7 @@
 
 A web service that is a prototype of a SOS system where users can send SOS messages to a central server alongwith their location. Built using firebase for online DB, JS(Ajax) for communication endpoints, HTML-CSS for design and Google Maps API. Details in the presentation file 'SOSWebApp.pptx'.
 
-Below is a screenshot of the screen on the client side(left-**send.html**) and server-side(right- Taskforces Side**recive.html**). The clientsends a SOS signal with the requisite message, which is reflected in the screen on the right as soon as received.
+Below is a screenshot of the screen on the client side(left~ **send.html**) and server-side(right- Taskforces Side~ **recive.html**). The clientsends a SOS signal with the requisite message, which is reflected in the screen on the right as soon as received.
 
 ![alt text](https://raw.githubusercontent.com/parthnan/SOS-WebApp/master/SOSdemo.png)
 
